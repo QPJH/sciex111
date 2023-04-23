@@ -31,6 +31,21 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="lib/adam.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/adam.h" />
+		<Unit filename="lib/allen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/allen.h" />
+		<Unit filename="lib/irene.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/irene.h" />
+		<Unit filename="q1.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

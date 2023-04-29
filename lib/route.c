@@ -26,15 +26,18 @@ ROUTE *route_create(unsigned x, unsigned y, unsigned stepNo)
 }
 
 // 印出路線的座標
-void route_print(ROUTE *route) {
+void route_print(ROUTE *route)
+{
     printf("#%d (%d, %d)\n", route->stepNo, route->x, route->y);
-    if(route->next) {
+    if(route->next)
+    {
         route_print(route->next);
     }
 }
 
 // 路線加入下一步
-ROUTE *route_next(ROUTE *route, unsigned x, unsigned y) {
+ROUTE *route_next(ROUTE *route, unsigned x, unsigned y)
+{
     ROUTE *next = route_create(x, y, route->stepNo + 1);
     next->prev = route;
     route->next = next;

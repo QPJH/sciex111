@@ -18,6 +18,7 @@ void route_destory(ROUTE *route)
     }
 
     free(route);
+    route = NULL;
 }
 
 // create route start with (x, y) and a stepNo

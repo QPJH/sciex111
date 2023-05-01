@@ -3,25 +3,24 @@
 #include "board.h"
 #include "route.h"
 
+// destory the board
 void board_destory(BOARD *board)
 {
     unsigned i;
-    if (!board)
-    {
-        return;
-    }
 
     if (board->route)
     {
-        // route_destory(board->route);
+        // don't clean if board has a running route
+        return;
     }
 
     for (i = 0; i < board_length(board); i++)
     {
+        // board->grids[i] is a (ROUTE *)
         if(!board->grids[i]) {
             continue;
         }
-        // free(board->grids[i]);
+        free(board->grids[i]);
         board->grids[i] = NULL;
     }
 
@@ -29,23 +28,23 @@ void board_destory(BOARD *board)
     board = NULL;
 }
 
-// 建立棋盤
+// create a board with size (N, M)
 BOARD *
-board_create(unsigned sizeX, unsigned sizeY)
+board_create(unsigned sizeN, unsigned sizeM)
 {
     BOARD *board;
 
     board = malloc(sizeof(BOARD));
-    board->sizeX = sizeX;
-    board->sizeY = sizeY;
-    board->grids = malloc(sizeX * sizeY * sizeof(ROUTE*));
+    board->sizeN = sizeN;
+    board->sizeM = sizeM;
+    board->grids = malloc(sizeN * sizeM * sizeof(ROUTE*));
 
     return board;
 }
 
-// 棋盤的一維長度
+// get board length
 unsigned
 board_length(BOARD *board)
 {
-    return board->sizeX * board->sizeY;
+    return board->sizeN * board->sizeM;
 }

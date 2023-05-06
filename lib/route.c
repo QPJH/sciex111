@@ -2,6 +2,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// copy the route
+ROUTE *
+route_copy(ROUTE *oldRoute)
+{
+    ROUTE *newRoute, *next;
+
+    // create new route like oldRoute
+    newRoute = route_create(oldRoute->x, oldRoute->y, oldRoute->stepNo, oldRoute->nextMove);
+
+    if(oldRoute->next) {
+        // copy route->next
+        next = route_copy(oldRoute->next);
+        newRoute->next = next;
+        newRoute->next->prev = newRoute;
+    }
+
+    return newRoute;
+}
+
 // destroy the route
 void route_destory(ROUTE *route)
 {
@@ -21,16 +40,17 @@ void route_destory(ROUTE *route)
     route = NULL;
 }
 
-// create route start with (x, y) and a stepNo
-ROUTE *route_create(unsigned x, unsigned y, unsigned stepNo)
+// create route start with (x, y) and a stepNo, nextMove
+ROUTE *route_create(unsigned x, unsigned y, unsigned stepNo, unsigned nextMove)
 {
     ROUTE *route;
 
     route = malloc(sizeof(ROUTE));
     route->stepNo = stepNo;
+    route->nextMove = nextMove;
     route->x = x;
     route->y = y;
-    route->next = NULL;    
+    route->next = NULL;
 
     return route;
 }
@@ -46,11 +66,34 @@ void route_print(ROUTE *route)
 }
 
 // add next one to the route
-ROUTE *route_next(ROUTE *route, unsigned x, unsigned y)
+ROUTE *
+route_next(ROUTE *route, unsigned x, unsigned y, unsigned nextMove)
 {
-    ROUTE *next = route_create(x, y, route->stepNo + 1);
+    ROUTE *next = route_create(x, y, route->stepNo + 1, nextMove);
     next->prev = route;
     route->next = next;
 
     return next;
+}
+
+// get route length
+unsigned
+route_length(ROUTE *route)
+{
+    if(route->next) {
+        return route_length(route->next) + 1;
+    }
+
+    return 1;
+}
+
+// get last one of the route
+ROUTE *
+route_last(ROUTE *route)
+{
+    if(route->next) {
+        return route_last(route->next);
+    }
+
+    return route;
 }

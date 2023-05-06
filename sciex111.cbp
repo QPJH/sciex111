@@ -39,10 +39,18 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/allen.h" />
+		<Unit filename="lib/board.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/board.h" />
 		<Unit filename="lib/irene.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="lib/irene.h" />
+		<Unit filename="lib/route.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/route.h" />
 		<Unit filename="q1.c">
 			<Option compilerVar="CC" />
 		</Unit>

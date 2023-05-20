@@ -92,10 +92,13 @@ route_length(ROUTE *route)
 ROUTE *
 route_last(ROUTE *route)
 {
-    if(route->next)
+    ROUTE *r;
+    for(r = route;r;r = r->next)
     {
-        return route_last(route->next);
+        if(!r->next)
+        {
+            return r;
+        }
     }
-
-    return route;
+    return r;
 }

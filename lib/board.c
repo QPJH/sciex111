@@ -140,7 +140,7 @@ board_svg(BOARD *board)
     }
     for (r = board->route; r ; r = r->next)
     {
-        if (r->stepNo < 100)
+        if (r->stepNo < 1000)
         {
             fprintf(fp, "<text dominant-baseline=\"middle\" text-anchor=\"middle\" x=\"%d\" y=\"%d\" dx=\"-0.1\" dy=\"0.1\" font-size=\"0.5\">%d</text>\n", r->x, r->y, r->stepNo);
         }

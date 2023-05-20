@@ -59,10 +59,11 @@ ROUTE *route_create(unsigned x, unsigned y, unsigned stepNo, unsigned nextMove)
 // print the route
 void route_print(ROUTE *route)
 {
-    printf("#%d (%d, %d)\n", route->stepNo, route->x, route->y);
-    if(route->next)
+    ROUTE *r;
+
+    for(r = route; r; r = r->next)
     {
-        route_print(route->next);
+        printf("#%d (%d, %d)\n", r->stepNo, r->x, r->y);
     }
 }
 

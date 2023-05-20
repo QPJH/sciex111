@@ -6,19 +6,15 @@
 ROUTE *
 route_copy(ROUTE *oldRoute)
 {
-    ROUTE *newRoute, *next;
+    ROUTE *newRoute, *n,*r;
 
     // create new route like oldRoute
     newRoute = route_create(oldRoute->x, oldRoute->y, oldRoute->stepNo, oldRoute->nextMove);
-
-    if(oldRoute->next)
+    n=newRoute;
+    for(r=oldRoute->next; r; r=r->next)
     {
-        // copy route->next
-        next = route_copy(oldRoute->next);
-        newRoute->next = next;
-        newRoute->next->prev = newRoute;
+        n = route_next(n,r->x,r->y,r->nextMove);
     }
-
     return newRoute;
 }
 
@@ -59,10 +55,10 @@ ROUTE *route_create(unsigned x, unsigned y, unsigned stepNo, unsigned nextMove)
 // print the route
 void route_print(ROUTE *route)
 {
-    printf("#%d (%d, %d)\n", route->stepNo, route->x, route->y);
-    if(route->next)
+    ROUTE *r;
+    for(r=route; r; r=r->next)
     {
-        route_print(route->next);
+        printf("#%d (%d, %d)\n", r->stepNo, r->x, r->y);
     }
 }
 
@@ -81,11 +77,12 @@ route_next(ROUTE *route, unsigned x, unsigned y, unsigned nextMove)
 unsigned
 route_length(ROUTE *route)
 {
-    if(route->next)
+    ROUTE *r;
+    int length=0;
+    for(r=route; r; r=r->next)
     {
-        return route_length(route->next) + 1;
+        length++;
     }
-
     return 1;
 }
 

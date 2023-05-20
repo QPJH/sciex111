@@ -11,7 +11,8 @@ route_copy(ROUTE *oldRoute)
     // create new route like oldRoute
     newRoute = route_create(oldRoute->x, oldRoute->y, oldRoute->stepNo, oldRoute->nextMove);
 
-    if(oldRoute->next) {
+    if(oldRoute->next)
+    {
         // copy route->next
         next = route_copy(oldRoute->next);
         newRoute->next = next;
@@ -80,7 +81,8 @@ route_next(ROUTE *route, unsigned x, unsigned y, unsigned nextMove)
 unsigned
 route_length(ROUTE *route)
 {
-    if(route->next) {
+    if(route->next)
+    {
         return route_length(route->next) + 1;
     }
 
@@ -91,7 +93,8 @@ route_length(ROUTE *route)
 ROUTE *
 route_last(ROUTE *route)
 {
-    if(route->next) {
+    if(route->next)
+    {
         return route_last(route->next);
     }
 

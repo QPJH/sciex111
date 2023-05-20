@@ -39,7 +39,8 @@ board_create(unsigned sizeN, unsigned sizeM)
     board->grids = malloc(sizeN * sizeM * sizeof(ROUTE*));
     board->route = NULL;
 
-    for (i = 0; i < sizeN*sizeM; i++) {
+    for (i = 0; i < sizeN*sizeM; i++)
+    {
         board->grids[i] = NULL;
     }
 
@@ -61,21 +62,27 @@ board_print(BOARD *board)
     ROUTE *r;
 
     length = board_length(board);
-    if(length == 0) {
+    if(length == 0)
+    {
         // no size
         printf("Not a board");
         return;
     }
 
-    for(i = 0; i < length; i++) {
+    for(i = 0; i < length; i++)
+    {
         r = board->grids[i];
-        if(r) {
+        if(r)
+        {
             printf(" %3d", r->stepNo);
-        } else {
+        }
+        else
+        {
             printf("    ");
         }
 
-        if((i+1) % board->sizeN == 0) {
+        if((i+1) % board->sizeN == 0)
+        {
             printf("\n");
         }
     }
@@ -91,7 +98,8 @@ board_svg(BOARD *board)
     char buf[128];
 
     length = board_length(board);
-    if(length == 0) {
+    if(length == 0)
+    {
         // no size
         printf("Not a board");
         return;
@@ -110,24 +118,30 @@ board_svg(BOARD *board)
     fprintf(fp, "<g fill=\"white\" stroke=\"gray\" stroke-width=\"0.025\">\n");
     fprintf(fp, "<rect x=\"0\" y=\"0\" width=\"%d\" height=\"%d\" />\n", board->sizeN, board->sizeM);
 
-    for (i = 1; i < board->sizeN; i++) {
+    for (i = 1; i < board->sizeN; i++)
+    {
         fprintf(fp, "<line x1=\"%d\" y1=\"0\" x2=\"%d\" y2=\"%d\" />\n", i, i, board->sizeM);
     }
 
-    for (i = 1; i < board->sizeM; i++) {
+    for (i = 1; i < board->sizeM; i++)
+    {
         fprintf(fp, "<line x1=\"0\" y1=\"%d\" x2=\"%d\" y2=\"%d\" />\n", i, board->sizeN, i);
     }
     fprintf(fp, "</g>\n");
 
     // polyline
     fprintf(fp, "<g transform=\"translate(0.5,0.5)\">");
-    for (r = board->route; r ; r = r->next) {
-        if (r->next) {
+    for (r = board->route; r ; r = r->next)
+    {
+        if (r->next)
+        {
             fprintf(fp, "<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" stroke=\"%s\" stroke-width=\"0.05\"/>", r->x, r->y, r->next->x, r->next->y, r->nextMove == BIG_L ? "green" : "yellow");
         }
     }
-    for (r = board->route; r ; r = r->next) {
-        if (r->stepNo < 100) {
+    for (r = board->route; r ; r = r->next)
+    {
+        if (r->stepNo < 100)
+        {
             fprintf(fp, "<text dominant-baseline=\"middle\" text-anchor=\"middle\" x=\"%d\" y=\"%d\" dx=\"-0.1\" dy=\"0.1\" font-size=\"0.5\">%d</text>\n", r->x, r->y, r->stepNo);
         }
     }
@@ -189,14 +203,16 @@ board_XY2Index(BOARD *board, unsigned x, unsigned y)
 
 // merge board and return route
 ROUTE *
-board_mergeRoute(BOARD *bFrom, BOARD *bTo, unsigned x, unsigned y) {
+board_mergeRoute(BOARD *bFrom, BOARD *bTo, unsigned x, unsigned y)
+{
     ROUTE *route, *r;
 
     route = route_last(bFrom->route);
     route->next = bTo->route;
     route->next->prev = route;
 
-    for(r = route->next; r; r = r->next) {
+    for(r = route->next; r; r = r->next)
+    {
         r->stepNo = r->stepNo + route->stepNo;
         r->x = r->x + x;
         r->y = r->y + y;

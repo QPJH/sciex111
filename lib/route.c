@@ -56,7 +56,8 @@ ROUTE *route_create(unsigned x, unsigned y, unsigned stepNo, unsigned nextMove)
 void route_print(ROUTE *route)
 {
     ROUTE *r;
-    for(r=route; r; r=r->next)
+
+    for(r = route; r; r = r->next)
     {
         printf("#%d (%d, %d)\n", r->stepNo, r->x, r->y);
     }
@@ -79,11 +80,12 @@ route_length(ROUTE *route)
 {
     ROUTE *r;
     int length=0;
-    for(r=route; r; r=r->next)
+    for(r=route; r; r = r->next)
     {
-        length++;
+        length=length + 1;
     }
-    return 1;
+
+    return length;
 }
 
 // get last one of the route

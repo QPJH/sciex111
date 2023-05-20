@@ -82,12 +82,14 @@ route_next(ROUTE *route, unsigned x, unsigned y, unsigned nextMove)
 unsigned
 route_length(ROUTE *route)
 {
-    if(route->next)
+    ROUTE *r;
+    int length=0;
+    for(r=route; r; r = r->next)
     {
-        return route_length(route->next) + 1;
+        length=length + 1;
     }
 
-    return 1;
+    return length;
 }
 
 // get last one of the route

@@ -220,3 +220,34 @@ board_mergeRoute(BOARD *bFrom, BOARD *bTo, unsigned x, unsigned y)
 
     return bFrom->route;
 }
+
+// rotate the board
+BOARD *
+board_rotate(BOARD *board)
+{
+    ROUTE *r;
+    BOARD *newBoard, *oldBoard;
+    int tmp, i;
+
+    oldBoard = board_copy(board);
+
+    for (i = 0; i < board_length(oldBoard); i++)
+    {
+        oldBoard->grids[i] = NULL;
+    }
+
+    for(r = oldBoard->route;r;r = r->next)
+    {
+        tmp = r->x;
+        r->x = r->y;
+        r->y = tmp;
+    }
+
+    newBoard = board_create(oldBoard->sizeM, oldBoard->sizeN);
+
+    board_addRoute(newBoard, oldBoard->route);
+
+    board_destory(oldBoard);
+
+    return newBoard;
+}

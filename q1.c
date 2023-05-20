@@ -3,10 +3,16 @@
 #include "lib/board.h"
 #include "lib/L_4x4_half_1.h"
 #include "lib/LL_4x4_half_1.h"
+#include "lib/LL_5x8_End_1.h"
+#include "lib/L_3x6_half_1.h"
+#include "lib/L_2x4_full.h"
+#include "lib/LL_4x6_full.h"
+#include "lib/L_6x6_full.h"
+#include "lib/L_3x3_start.h"
 
 int main()
 {
-    BOARD *board1, *board2, *board3, *board;
+    BOARD *board1, *board2, *board3, *board, *tmpboard;
     ROUTE *route, *last;
 
     // 半成品1
@@ -14,9 +20,14 @@ int main()
 
     //4x4_L_half_1
     printf("大馬開始的4x4半成品1\n");
-    board1 = L_4x4_half_1();
+    board1 = LL_5x8_End_1();
     board_svg(board1);
     board_print(board1);
+    printf("\n\n");
+    // rotate board1
+    tmpboard = board_rotate(board1);
+    board_print(tmpboard);
+    board_svg(tmpboard);
 
 
     printf("小馬開始的4x4半成品2\n");

@@ -46,4 +46,7 @@ int board_XY2Index(BOARD *board, unsigned x, unsigned y);
 // merge board and return route
 ROUTE *board_mergeRoute(BOARD *bFrom, BOARD *bTo, unsigned x, unsigned y);
 
+// rotate the board
+BOARD *board_rotate(BOARD *board);
+
 #endif

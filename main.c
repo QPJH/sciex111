@@ -28,7 +28,7 @@ int main()
     {
         BOARD *totalBoard;
 
-        totalBoard = board_4kx4k(m, n);
+        totalBoard = board_4kx4k(n, m);
 
         board_print(totalBoard);
 
@@ -39,7 +39,7 @@ int main()
     {
         BOARD *totalBoard;
 
-        //totalBoard = board_4kx4k2(m, n);
+        //totalBoard = board_4kx4k2(n, m);
 
         board_print(totalBoard);
 
@@ -50,7 +50,7 @@ int main()
     {
         BOARD *totalBoard;
 
-        //totalBoard = board_4k2x4k(m, n);
+        //totalBoard = board_4k2x4k(n, m);
 
         board_print(totalBoard);
 
@@ -61,7 +61,7 @@ int main()
     {
         BOARD *totalBoard;
 
-        //totalBoard = board_4k2x4k2(m, n);
+        //totalBoard = board_4k2x4k2(n, m);
 
         board_print(totalBoard);
 
@@ -73,7 +73,7 @@ int main()
     {
         BOARD *totalboard;
 
-        totalboard = board_4k2x4k1(m, n);
+        totalboard = board_4k2x4k1(n, m);
 
         board_print(totalboard);
     }

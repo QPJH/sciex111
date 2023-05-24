@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "lib/adam.h"
 #include "lib/route.h"
 #include "lib/board.h"
 #include "lib/board_4kx4k.h"
@@ -26,9 +27,17 @@ int main()
 
     if(m % 4 == 0 && n % 4 == 0)// 4k x 4k
     {
+        ROUTE *r;
+
         BOARD *totalBoard;
 
-        totalBoard = board_4kx4k(n, m);
+        totalBoard = board_create(4, 8);
+
+        r = route_create(0, 0, 0, BIG_L);
+
+        board_addRoute(totalBoard, r);
+
+        totalBoard = adam_dfs(totalBoard);
 
         board_print(totalBoard);
 
@@ -50,7 +59,7 @@ int main()
     {
         BOARD *totalBoard;
 
-        //totalBoard = board_4k2x4k(n, m);
+            totalBoard = board_4k2x4k(n, m);
 
         board_print(totalBoard);
 

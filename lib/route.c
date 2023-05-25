@@ -21,20 +21,30 @@ route_copy(ROUTE *oldRoute)
 // destroy the route
 void route_destory(ROUTE *route)
 {
-    if(route->prev)
+    ROUTE *r;
+
+    if (route->prev)
     {
         route->prev->next = NULL;
     }
 
-    if (route->next)
-    {
-        route_destory(route->next);
-        free(route->next);
-        route->next = NULL;
-    }
+    route->prev = NULL;
 
-    free(route);
-    route = NULL;
+    r = route_last(route);
+
+    for(r = route_last(route); r;)
+    {
+        if (r->prev)
+        {
+            r = r->prev;
+            free(r->next);
+        }
+        else
+        {
+            // r has no previous, so break;
+            break;
+        }
+    }
 }
 
 // create route start with (x, y) and a stepNo, nextMove
@@ -47,6 +57,7 @@ ROUTE *route_create(unsigned x, unsigned y, unsigned stepNo, unsigned nextMove)
     route->nextMove = nextMove;
     route->x = x;
     route->y = y;
+    route->prev = NULL;
     route->next = NULL;
 
     return route;
@@ -93,12 +104,14 @@ ROUTE *
 route_last(ROUTE *route)
 {
     ROUTE *r;
-    for(r = route;r;r = r->next)
+
+    for (r = route; r; r = r->next)
     {
         if(!r->next)
         {
             return r;
         }
     }
-    return r;
+
+    return route;
 }

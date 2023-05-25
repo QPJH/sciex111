@@ -30,8 +30,6 @@ void route_destory(ROUTE *route)
 
     route->prev = NULL;
 
-    r = route_last(route);
-
     for(r = route_last(route); r;)
     {
         if (r->prev)
@@ -42,6 +40,7 @@ void route_destory(ROUTE *route)
         else
         {
             // r has no previous, so break;
+            free(r);
             break;
         }
     }

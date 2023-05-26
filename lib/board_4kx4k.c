@@ -1,8 +1,10 @@
+#include <stdio.h>
 #include "board_4kx4k.h"
 #include "L_4x4_half_1.h"
 #include "LL_4x4_half_1.h"
 #include "LL_4x4_full_1.h"
 #include "LL_4x4_half_2.h"
+#include "LL_4x4_half_3.h"
 
 // create 4k x 4k
 BOARD *board_4kx4k(int n, int m)
@@ -17,6 +19,7 @@ BOARD *board_4kx4k(int n, int m)
     middleBoard = LL_4x4_full_1();
     bodyBoard2 = LL_4x4_half_2();
     tailBoard = LL_4x4_half_3();
+    tmpBoard = NULL;
 
     //headBoard + bodyBoard1
     totalBoard = board_copy(headBoard);
@@ -54,7 +57,9 @@ BOARD *board_4kx4k(int n, int m)
     }
 
     // tailBoard
-    board_destory(tmpBoard);
+    if(tmpBoard) {
+        board_destory(tmpBoard);
+    }
     tmpBoard = board_copy(tailBoard);
     route = board_mergeRoute(totalBoard, tmpBoard, 0, 0);
     board_destory(totalBoard);

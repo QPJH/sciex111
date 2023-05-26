@@ -1,4 +1,4 @@
-#include "board_4K2x4K2.h"
+#include "board_4k2x4k2.h"
 #include "L_4x4_half_1.h"
 #include "LL_4x4_half_1.h"
 #include "LL_4x4_full_1.h"

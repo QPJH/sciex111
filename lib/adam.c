@@ -75,6 +75,7 @@ void board_markCompeleted(BOARD *board)
 
 int maxLength = 0;
 ROUTE *maxRoute = NULL;
+ROUTE *last = NULL;
 
 ROUTE *
 adam_dfsRoute(BOARD *board)
@@ -179,13 +180,15 @@ adam_dfs2(BOARD *board)
 
     length = board_length(board);
 
-    b = board_copy(board);
+    if (!last) {
+       last = route_last(board->route);
+    }
 
     for(i = 0; i < length; i++)
     {
-        r = route_last(b->route);
+        r = last;
 
-        if( b->grids[i] )
+        if( board->grids[i] )
         {
             continue;
         }
@@ -207,13 +210,13 @@ adam_dfs2(BOARD *board)
         )
         {
             r = route_next(r, x, y, SMALL_L);
-            b->grids[i] = r;
+            board->grids[i] = r;
 
             used = 0;
 
             for (j = 0; j < length; j++)
             {
-                if ( b->grids[j] )
+                if ( board->grids[j] )
                 {
                     used ++;
                 }
@@ -222,13 +225,13 @@ adam_dfs2(BOARD *board)
 
             if ( r->stepNo > maxLength)
             {
-                maxRoute = route_copy(b->route);
+                maxRoute = route_copy(board->route);
                 maxLength = r->stepNo;
             }
 
             if ( used == length )
             {
-                board_print(b);
+                board_print(board);
                 printf("\n");
                 break;
             }
@@ -236,7 +239,7 @@ adam_dfs2(BOARD *board)
             //SMALL_L
             for (j = 0; j < length; j++)
             {
-                if( b->grids[j] )
+                if( board->grids[j] )
                 {
                     continue;
                 }
@@ -250,20 +253,22 @@ adam_dfs2(BOARD *board)
                 )
                 {
                     r2 = route_next(r, x, y, BIG_L);
-                    b->grids[j] = r2;
-                    adam_dfs2(b);
-                    b->grids[j] = NULL;
+                    board->grids[j] = r2;
+                    last = r2;
+                    adam_dfs2(board);
+                    board->grids[j] = NULL;
                     route_destory(r2);
                 }
             }
 
-            b->grids[i] = NULL;
+            board->grids[i] = NULL;
+            last = r->prev;
             route_destory(r);
         }
     }
 
-    route_destory(b->route);
-    board_destory(b);
+    //route_destory(b->route);
+    //board_destory(b);
 
     // no next move;
     //if(length == used)

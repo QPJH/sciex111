@@ -21,6 +21,12 @@ int main()
         printf("n = ? ");
         scanf("%d",&n);
 
+        if(m == 1 && n == 1)
+        {
+            printf("\n0\n");
+            return 0;
+        }
+
         if(m <= 0 || n <= 0)
         {
             printf("Error \n");
@@ -34,7 +40,7 @@ int main()
 
         totalBoard = board_4kx4k(n, m);
 
-        board_print(totalBoard);
+        // board_print(totalBoard);
 
         board_svg(totalBoard);
 
@@ -47,7 +53,7 @@ int main()
 
         totalBoard = board_4kx4k2(n, m);
 
-        board_print(totalBoard);
+        // board_print(totalBoard);
 
         board_svg(totalBoard);
 
@@ -60,7 +66,7 @@ int main()
 
         totalBoard = board_4k2x4k(n, m);
 
-        board_print(totalBoard);
+        // board_print(totalBoard);
 
         board_svg(totalBoard);
 
@@ -73,7 +79,7 @@ int main()
 
         totalBoard = board_4k2x4k2(n, m);
 
-        board_print(totalBoard);
+        // board_print(totalBoard);
 
         board_svg(totalBoard);
 
@@ -94,11 +100,13 @@ int main()
         return 0;
     }
     */
+
+    // DFS
     BOARD *totalBoard;
     ROUTE *route, *maxRoute;
 
     totalBoard = board_create(n, m);
-    route = route_create(0, 0, 0, BIG_L);
+    route = route_create(1, 0, 0, SMALL_L);
     board_addRoute(totalBoard, route);
 
     maxRoute = adam_dfsRoute(totalBoard);

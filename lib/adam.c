@@ -10,7 +10,7 @@ ROUTE *last = NULL;
 ROUTE *
 adam_dfsRoute(BOARD *board)
 {
-    adam_dfs2(board);
+    adam_dfs_SS(board);
 
     return maxRoute;
 }
@@ -88,7 +88,8 @@ adam_dfs(BOARD *board)
     // no next move;
     if ( rLast->stepNo > maxLength )
     {
-        if( (maxRoute)) {
+        if( (maxRoute))
+        {
             route_destory(maxRoute);
         }
         maxRoute = route_copy(b->route);
@@ -102,7 +103,7 @@ adam_dfs(BOARD *board)
 
     route_destory(b->route);
     board_destory(b);
-    
+
     return board;
 }
 
@@ -121,8 +122,9 @@ adam_dfs2(BOARD *board)
 
     length = board_length(board);
 
-    if (!last) {
-       last = route_last(board->route);
+    if (!last)
+    {
+        last = route_last(board->route);
     }
 
     for(i = 0; i < length; i++)
@@ -164,7 +166,7 @@ adam_dfs2(BOARD *board)
 
             }
 
-            if ( r->stepNo > maxLength)
+            if ( r->stepNo > maxLength )
             {
                 maxRoute = route_copy(board->route);
                 maxLength = r->stepNo;
@@ -220,3 +222,66 @@ adam_dfs2(BOARD *board)
     return board;
 }
 
+BOARD *
+adam_dfs_SS(BOARD *board)
+{
+
+    unsigned length, i, used = 0;
+    int x, y;
+    BOARD *b;
+    ROUTE *r, *rLast;
+
+    if(!board->route)
+    {
+        return board;
+    }
+
+    length = board_length(board);
+
+    b = board_copy(board);
+
+    rLast = route_last(b->route);
+    for(i = 0; i < length; i++)
+    {
+        r = rLast;
+
+        if( b->grids[i] )
+        {
+            used ++;
+            continue;
+        }
+
+        x = i % board->sizeN;
+        y = i / board->sizeN;
+
+        if (
+            (x == (r->x - 1) &&  y == (r->y - 1)) ||
+            (x == (r->x + 1) &&  y == (r->y - 1)) ||
+            (x == (r->x - 1) &&  y == (r->y + 1)) ||
+            (x == (r->x + 1) &&  y == (r->y + 1))
+        )
+        {
+            r = route_next(r, x, y, SMALL_L);
+            b->grids[i] = r;
+            adam_dfs_SS(b);
+            b->grids[i] = NULL;
+            route_destory(r);
+        }
+    }
+
+    // no next move;
+    if ( rLast->stepNo > maxLength )
+    {
+        if( (maxRoute))
+        {
+            route_destory(maxRoute);
+        }
+        maxRoute = route_copy(b->route);
+        maxLength = rLast->stepNo;
+    }
+
+    route_destory(b->route);
+    board_destory(b);
+
+    return board;
+}

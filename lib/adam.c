@@ -10,7 +10,7 @@ ROUTE *last = NULL;
 ROUTE *
 adam_dfsRoute(BOARD *board)
 {
-    adam_dfs_SS(board);
+    adam_dfs2(board);
 
     return maxRoute;
 }

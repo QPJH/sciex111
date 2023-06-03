@@ -106,7 +106,7 @@ int main()
     ROUTE *route, *maxRoute;
 
     totalBoard = board_create(n, m);
-    route = route_create(1, 0, 0, SMALL_L);
+    route = route_create(0, 0, 0, BIG_L);
     board_addRoute(totalBoard, route);
 
     maxRoute = adam_dfsRoute(totalBoard);

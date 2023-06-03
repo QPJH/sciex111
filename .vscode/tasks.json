@@ -3,7 +3,7 @@
         {
             "type": "cppbuild",
             "label": "C/C++: gcc 建置使用中檔案",
-            "command": "/usr/bin/gcc",
+            "command": "gcc",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",

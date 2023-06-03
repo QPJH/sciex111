@@ -1,3 +1,4 @@
 bin/
 *.save-failed
 obj/
+*.svg

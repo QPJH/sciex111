@@ -112,7 +112,6 @@ adam_dfs2(BOARD *board)
 {
     unsigned length, i, j, used = 0;
     int x, y;
-    BOARD *b;
     ROUTE *r, *r2;
 
     if(!board->route)

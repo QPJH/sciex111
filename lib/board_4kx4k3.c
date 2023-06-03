@@ -8,7 +8,7 @@ BOARD *
 board_4kx4k3(int n,int m)
 {
     int i;
-    BOARD *firstBoard, *bodyBoard, *tailBoard, *totalBoard, *tmpBoard;
+    BOARD *firstBoard, *bodyBoard, *tailBoard, *totalBoard;
     ROUTE *route;
 
     firstBoard = board_4kx4k(n - 3, m);

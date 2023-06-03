@@ -1,8 +1,10 @@
+#include <stdio.h>
 #include "board_4kx4k2.h"
 #include "L_4x4_half_1.h"
 #include "LL_4x4_half_1.h"
 #include "LL_4x4_full_1.h"
 #include "LL_4x4_half_2.h"
+#include "LL_4x4_half_3.h"
 #include "L_2x4_full.h"
 
 // create 4k x 4k2
@@ -22,6 +24,7 @@ BOARD *board_4kx4k2(int n, int m)
 
     //headBoard + bodyBoard1
     totalBoard = board_copy(headBoard);
+    tmpBoard = NULL;
 
     for(i = 0; i < (m / 4 - 2); i++)
     {

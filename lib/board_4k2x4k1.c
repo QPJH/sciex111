@@ -1,8 +1,10 @@
+#include <stdio.h>
 #include "board_4kx4k.h"
 #include "L_4x4_half_1.h"
 #include "LL_4x4_half_1.h"
 #include "LL_4x6_full.h"
 #include "LL_4x4_half_2.h"
+#include "LL_4x4_half_3.h"
 #include "L_2x4_full.h"
 #include "adam.h"
 
@@ -11,7 +13,7 @@ BOARD *board_4k2x4k1(int n, int m)
 {
     // 4k x 4k2
     int i, tmp;
-    BOARD *tmpBoard, *board4M, *totalBoard, *headBoard, *bodyBoard1, *middleBoard, *bodyBoard2, *tailBoard ,*tailBoard2;
+    BOARD *tmpBoard, *board4M, *totalBoard, *headBoard, *bodyBoard1, *middleBoard, *bodyBoard2, *tailBoard;
     ROUTE *route;
 
     headBoard = L_4x4_half_1();
@@ -22,6 +24,7 @@ BOARD *board_4k2x4k1(int n, int m)
 
     //headBoard + bodyBoard1
     totalBoard = board_copy(headBoard);
+    tmpBoard = NULL;
 
     for(i = 0; i < ((m - 2) / 4 - 2); i++)
     {

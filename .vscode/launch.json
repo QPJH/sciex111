@@ -23,7 +23,7 @@
                 }
             ],
             "preLaunchTask": "C/C++: gcc 建置使用中檔案",
-            "miDebuggerPath": "/usr/bin/gdb"
+            "miDebuggerPath": "gdb"
         }
     ]
 }

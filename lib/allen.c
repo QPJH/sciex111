@@ -1,7 +1,8 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include "route.h"
 #include "board.h"
 #include "allen.h"
+#include "adam.h"
 
 int allen_maxLength = 0;
 ROUTE *allen_maxRoute = NULL;
@@ -19,7 +20,6 @@ allen_dfsRoute(BOARD *board)
 BOARD *
 adam_dfs_SS(BOARD *board)
 {
-
     unsigned length, i, used = 0;
     int x, y;
     BOARD *b;

@@ -1,4 +1,4 @@
-/*#ifndef __ALLEN__
+#ifndef __ALLEN__
 #define __ALLEN__
 #include "board.h"
 

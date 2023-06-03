@@ -2,6 +2,7 @@
 #include "route.h"
 #include "board.h"
 #include "adam.h"
+#include "allen.h"
 
 int maxLength = 0;
 ROUTE *maxRoute = NULL;
@@ -221,7 +222,7 @@ adam_dfs2(BOARD *board)
     return board;
 }
 
-BOARD *
+/*BOARD *
 adam_dfs_SS(BOARD *board)
 {
 
@@ -283,4 +284,4 @@ adam_dfs_SS(BOARD *board)
     board_destory(b);
 
     return board;
-}
+}*/

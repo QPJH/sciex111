@@ -34,13 +34,40 @@ int main()
         }
     }
 
+    if (
+        (m == 2 && n % 4 == 2) ||
+        (m % 4 == 2 && n == 2) ||
+        (m % 2 == 1) || (n % 2 == 1)
+        || m * n < 50
+    )
+    {
+        // DFS
+        BOARD *totalBoard;
+        ROUTE *route, *maxRoute;
+
+        totalBoard = board_create(n, m);
+        route = route_create(0, 0, 0, BIG_L);
+        board_addRoute(totalBoard, route);
+
+        maxRoute = adam_dfsRoute(totalBoard);
+
+        board_destory(totalBoard);
+
+        totalBoard = board_create(n, m);
+
+        board_addRoute(totalBoard, maxRoute);
+        board_print(totalBoard);
+        board_svg(totalBoard);
+        return 0;
+    }
+
     if(m % 4 == 0 && n % 4 == 0)// 4k x 4k
     {
         BOARD *totalBoard;
 
         totalBoard = board_4kx4k(n, m);
 
-        // board_print(totalBoard);
+        board_print(totalBoard);
 
         board_svg(totalBoard);
 
@@ -101,23 +128,6 @@ int main()
     }
     */
 
-    // DFS
-    BOARD *totalBoard;
-    ROUTE *route, *maxRoute;
-
-    totalBoard = board_create(n, m);
-    route = route_create(0, 0, 0, BIG_L);
-    board_addRoute(totalBoard, route);
-
-    maxRoute = adam_dfsRoute(totalBoard);
-
-    board_destory(totalBoard);
-
-    totalBoard = board_create(n, m);
-
-    board_addRoute(totalBoard, maxRoute);
-
-    board_svg(totalBoard);
 
     return 0;
 }

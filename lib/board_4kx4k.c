@@ -37,7 +37,9 @@ BOARD *board_4kx4k(int n, int m)
     if(m > 4)
     {
         // middleBoard
-        board_destory(tmpBoard);
+        if (tmpBoard) {
+            board_destory(tmpBoard);
+        }
         tmpBoard = board_copy(middleBoard);
         route = board_mergeRoute(totalBoard, tmpBoard, 0, tmp = totalBoard->sizeM);
         board_destory(totalBoard);

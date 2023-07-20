@@ -221,6 +221,25 @@ board_mergeRoute(BOARD *bFrom, BOARD *bTo, unsigned x, unsigned y)
     return bFrom->route;
 }
 
+ROUTE *
+board_mergeRouteFull(BOARD *bFrom, BOARD *bTo, unsigned x, unsigned y)
+{
+    ROUTE *route, *r;
+
+    route = route_last(bFrom->route);
+    route->next = bTo->route;
+    route->next->prev = route;
+
+    for(r = route->next; r; r = r->next)
+    {
+        r->stepNo = r->stepNo + route->stepNo + 1;
+        r->x = r->x + x;
+        r->y = r->y + y;
+    }
+
+    return bFrom->route;
+}
+
 // rotate the board
 BOARD *
 board_rotate(BOARD *board)

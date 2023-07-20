@@ -74,7 +74,7 @@ BOARD *board_4kx4k(int n, int m)
     {
         board_destory(tmpBoard);
         tmpBoard = board_copy(board4M);
-        route = board_mergeRoute(totalBoard, tmpBoard, totalBoard->sizeN, 0);
+        route = board_mergeRouteFull(totalBoard, tmpBoard, totalBoard->sizeN, 0);
         board_destory(totalBoard);
         totalBoard = board_create(4 * (i + 2), m);
         board_addRoute(totalBoard, route);

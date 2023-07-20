@@ -25,8 +25,10 @@ board_4kx4k1(int n,int m)
     tailBoard2 = LL_5x8_End_1();
     tmpBoard = NULL;
 
+    //headBoard + bodyBoard1
     totalBoard = board_copy(headBoard);
-        for(i = 0; i < (m / 4 - 2); i++)
+
+    for(i = 0; i < (m / 4 - 2); i++)
     {
         // bodyBoard1
         tmpBoard = board_copy(bodyBoard1);
@@ -39,7 +41,9 @@ board_4kx4k1(int n,int m)
     if(m > 4)
     {
         // middleBoard
-        board_destory(tmpBoard);
+        if (tmpBoard) {
+            board_destory(tmpBoard);
+        }
         tmpBoard = board_copy(middleBoard);
         route = board_mergeRoute(totalBoard, tmpBoard, 0, tmp = totalBoard->sizeM);
         board_destory(totalBoard);
@@ -47,7 +51,7 @@ board_4kx4k1(int n,int m)
         board_addRoute(totalBoard, route);
     }
 
-    for(i = 0; i < (m / 4 - 2); i++)
+    for(i = 0; i < (m / 4 - 3); i++)
     {
         // bodyBoard2
         board_destory(tmpBoard);
@@ -58,28 +62,23 @@ board_4kx4k1(int n,int m)
         board_addRoute(totalBoard, route);
     }
 
-    // tailBoard
+    // tailBoard2
     if(tmpBoard) {
         board_destory(tmpBoard);
     }
-    tmpBoard = board_copy(tailBoard);
+    tmpBoard = board_copy(tailBoard2);
     route = board_mergeRoute(totalBoard, tmpBoard, 0, 0);
     board_destory(totalBoard);
-    totalBoard = board_create(4, m-8);
+    totalBoard = board_create(5, m);
     board_addRoute(totalBoard, route);
 
-    tmpBoard = board_copy(tailBoard2);
-    route = board_mergeRoute(totalBoard, tmpBoard, 4, 6);
+    // fullboard
+    board_destory(tmpBoard);
+    tmpBoard = board_copy(totalBoard);
+    route = board_mergeRouteFull(firstBoard, tmpBoard, firstBoard->sizeN, 0);
     board_destory(totalBoard);
-    totalBoard = board_create(5, 8);
-    board_addRoute(totalBoard, route);
-
-
     totalBoard = board_create(n, m);
-
     board_addRoute(totalBoard, route);
-
-    // board_print(totalBoard);
 
     return totalBoard;
 }

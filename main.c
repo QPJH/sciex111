@@ -7,8 +7,11 @@
 #include "lib/board_4kx4k.h"
 #include "lib/board_4k2x4k.h"
 #include "lib/board_4kx4k2.h"
+#include "lib/board_4kx4k1.h"
 #include "lib/board_4k2x4k2.h"
+#include "lib/board_4k2x4k1.h"
 #include "lib/board_4kx4k3.h"
+#include "lib/oddxodd.h"
 
 int main()
 {
@@ -34,12 +37,7 @@ int main()
         }
     }
 
-    if (
-        (m == 2 && n % 4 == 2) ||
-        (m % 4 == 2 && n == 2) ||
-        (m % 2 == 1) || (n % 2 == 1)
-        || m * n < 50
-    )
+    if (m * n < 100)
     {
         // DFS
         BOARD *totalBoard;
@@ -80,7 +78,7 @@ int main()
 
         totalBoard = board_4kx4k2(n, m);
 
-        // board_print(totalBoard);
+        board_print(totalBoard);
 
         board_svg(totalBoard);
 
@@ -93,7 +91,7 @@ int main()
 
         totalBoard = board_4k2x4k(n, m);
 
-        // board_print(totalBoard);
+        board_print(totalBoard);
 
         board_svg(totalBoard);
 
@@ -106,14 +104,39 @@ int main()
 
         totalBoard = board_4k2x4k2(n, m);
 
-        // board_print(totalBoard);
+        board_print(totalBoard);
 
         board_svg(totalBoard);
 
         return 0;
     }
 
-    /*
+    if(m % 4 == 0 && n % 4 == 1)// 4k x 4k1
+    {
+        BOARD *totalBoard;
+
+        totalBoard = board_4kx4k1(n, m);
+
+        board_print(totalBoard);
+
+        board_svg(totalBoard);
+
+        return 0;
+    }
+
+    if(m % 4 == 2 && n % 4 == 1)// 4k2 x 4k1
+    {
+        BOARD *totalBoard;
+
+        totalBoard = board_4k2x4k1(n, m);
+
+        board_print(totalBoard);
+
+        board_svg(totalBoard);
+
+        return 0;
+    }
+
     if(m % 4 == 0 && n % 4 == 3)// 4k x 4k3
     {
         BOARD *totalBoard;
@@ -126,8 +149,34 @@ int main()
 
         return 0;
     }
+
+    /*
+    if(m % 4 == 2 && n % 4 == 3)// 4k2 x 4k3
+    {
+        BOARD *totalBoard;
+
+        totalBoard = board_4k2x4k3(n, m);
+
+        board_print(totalBoard);
+
+        board_svg(totalBoard);
+
+        return 0;
+    }
     */
 
+    if(m % 2 == 1 && n % 2 == 1)
+    {
+        BOARD *totalBoard;
+
+        totalBoard = oddxodd(n, m);
+
+        board_print(totalBoard);
+
+        board_svg(totalBoard);
+
+        return 0;
+    }
 
     return 0;
 }

@@ -15,11 +15,11 @@ board_4kx4k3(int n,int m)
     bodyBoard = L_3x6_half_1();
     tailBoard = L_2x4_full();
 
-    route = board_mergeRoute(firstBoard, bodyBoard,  (n - 3), 0);
+    route = board_mergeRouteFull(firstBoard, bodyBoard,  (n - 3), 0);
 
     for (i = 0;i < (m / 4) - 1;i++)
     {
-        route = board_mergeRoute(firstBoard, tailBoard, (n - 3), ((i + 1) * 4));
+        route = board_mergeRouteFull(firstBoard, tailBoard, (n - 3), ((i + 1) * 4));
         board_destory(tailBoard);
         tailBoard = L_2x4_full();
     }

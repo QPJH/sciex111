@@ -68,11 +68,11 @@ BOARD *board_4k2x4k2(int n,int m)
 
     // full board
     board4M = board_copy(totalBoard);
-    for(i = 0; i < ((n - 2)/ 4 - 1); i++)
+    for(i = 0; i < ((n - 2)/ 4 - 2); i++)
     {
         board_destory(tmpBoard);
         tmpBoard = board_copy(board4M);
-        route = board_mergeRoute(totalBoard, tmpBoard, totalBoard->sizeN, 0);
+        route = board_mergeRouteFull(totalBoard, tmpBoard, totalBoard->sizeN, 0);
         board_destory(totalBoard);
         totalBoard = board_create(4 * (i + 2), m);
         board_addRoute(totalBoard, route);
@@ -80,12 +80,12 @@ BOARD *board_4k2x4k2(int n,int m)
 
     board_destory(tmpBoard);
     tmpBoard=board_4kx4k2(6,m-6);
-    route = board_mergeRoute(totalBoard, tmpBoard, n-6, 0);
+    route = board_mergeRouteFull(totalBoard, tmpBoard, n-6, 0);
     board_destory(totalBoard);
     totalBoard = board_create(n, m);
     board_addRoute(totalBoard, route);
 
-    route = board_mergeRoute(totalBoard, middleBoard3, n-6, m-6);
+    route = board_mergeRouteFull(totalBoard, middleBoard3, n-6, m-6);
     board_destory(totalBoard);
     totalBoard = board_create(n, m);
     board_addRoute(totalBoard, route);

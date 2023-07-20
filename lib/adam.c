@@ -7,12 +7,13 @@
 int maxLength = 0;
 ROUTE *maxRoute = NULL;
 ROUTE *last = NULL;
+int v = 0;
 
 ROUTE *
 adam_dfsRoute(BOARD *board)
 {
     adam_dfs2(board);
-
+    printf("V = %d\n", v);
     return maxRoute;
 }
 
@@ -115,6 +116,7 @@ adam_dfs2(BOARD *board)
     int x, y;
     ROUTE *r, *r2;
 
+    v ++;
     if(!board->route)
     {
         return board;
@@ -151,6 +153,7 @@ adam_dfs2(BOARD *board)
             (x == (r->x + 1) &&  y == (r->y + 2))
         )
         {
+            v ++;
             r = route_next(r, x, y, SMALL_L);
             board->grids[i] = r;
 
